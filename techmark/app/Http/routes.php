@@ -22,3 +22,6 @@ Route::group(['prefix'=>'admin','middleware'=>['auth'],'namespace'=>'Admin'], fu
     Route::resource('usuario','UserController');
 
 });
+Route::get('/p',function(){
+	echo \Hash::make("123123");
+});
