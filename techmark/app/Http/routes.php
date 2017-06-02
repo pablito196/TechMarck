@@ -22,6 +22,12 @@ Route::group(['prefix'=>'admin','middleware'=>['auth'],'namespace'=>'Admin'], fu
     Route::resource('usuario','UserController');
 
 });
+Route::group(['prefix'=>'almacen','middleware'=>['auth']/*,'namespace'=>'Almacen'*/], function(){
+
+    /* todo  referente a usuarios */
+    Route::resource('articulo','ArticuloController');
+
+});
 Route::get('/p',function(){
 	echo \Hash::make("123123");
 });
