@@ -31,3 +31,10 @@ Route::group(['prefix'=>'almacen','middleware'=>['auth']/*,'namespace'=>'Almacen
 Route::get('/p',function(){
 	echo \Hash::make("123123");
 });
+
+Route::group(['prefix'=>'ventas','middleware'=>['auth'],'namespace'=>'Clientes'], function(){
+
+    /* todo  referente a usuarios */
+    Route::resource('cliente','ClienteController');
+
+});
