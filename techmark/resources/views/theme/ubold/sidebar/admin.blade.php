@@ -19,11 +19,8 @@
                 </li>
 
                 <li>
-<<<<<<< HEAD
                     <a href="javascript:void(0);" class="waves-effect"><i class="icon-people"></i><span class="label label-primary pull-right">1</span> <span> Almacen </span>  </a>
-=======
                     <a href="javascript:void(0);" class="waves-effect"><i class="icon-basket"></i><span class="label label-primary pull-right">2</span> <span> Almacen </span>  </a>
->>>>>>> 44ebbab7ced036067c5a825adf21075329a2f282
                     <ul class="list-unstyled">
                         <li><a href="{{route('almacen.almacen.index')}}">Almacenes</a></li>
                         <li><a href="{{route('almacen.articulo.index')}}">Articulos</a></li>
@@ -40,7 +37,6 @@
                         <li><a href="{{route('proveedores.proveedor.index')}}">Proveedores</a></li>
                     </ul>
                 </li>
-<<<<<<< HEAD
                 
                  <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect"><i class="icon-people"></i><span class="label label-primary pull-right">2</span> <span> Clientes & Visitas</span>  </a>
@@ -49,8 +45,6 @@
                         <li><a href="{{route('ventas.visita.index')}}">Visitas</a></li>
                     </ul>
                 </li>
-=======
->>>>>>> 44ebbab7ced036067c5a825adf21075329a2f282
 
             </ul>
             <div class="clearfix"></div>
