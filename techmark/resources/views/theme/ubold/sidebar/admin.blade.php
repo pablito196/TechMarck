@@ -30,7 +30,12 @@
                         <li><a href="{{route('almacen.tipoarticulo.index')}}">Tipo Articulo</a></li>
                     </ul>
                 </li>
-                
+                <li>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="icon-people"></i><span class="label label-primary pull-right">2</span> <span> Proveedores </span>  </a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{route('proveedores.proveedor.index')}}">Proveedores</a></li>
+                    </ul>
+                </li>
 
             </ul>
             <div class="clearfix"></div>
