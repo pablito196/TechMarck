@@ -4,31 +4,26 @@
 </div>
 
 <div>
-	{!! Form::label('Familia ')!!}
+	{!! Form::label('Familia (*) ')!!}
 	{!! Form::select('IdFamilia',$familias,null,['class'=>'selectpicker','required'])!!}
 </div>
 
 <div>
-	{!! Form::label('Medida ')!!}
+	{!! Form::label('Medida (*)')!!}
 	{!! Form::select('IdMedida',$medidas,null,['class'=>'selectpicker','required'])!!}
 </div>
 
 <div>
-	{!! Form::label('Marca ')!!}
+	{!! Form::label('Marca (*)')!!}
 	{!! Form::select('IdMarca',$marcas,null,['class'=>'selectpicker','required'])!!}
 </div>
 
 <div>
-	{!! Form::label('Tipo Articulo ')!!}
+	{!! Form::label('Tipo Articulo (*)')!!}
 	{!! Form::select('IdTipoArticulo',$tipo_articulo,null,['class'=>'selectpicker','required'])!!}
 </div>
 
 <div class="form-group col-lg-12">
     {!! Form::label('Codigo ')!!}
     {!! Form::text('Codigo',null,['class'=>'form-control','required','placeholder'=>'Codigo...'])!!}
-</div>
-
-<div class="form-group col-lg-12">
-    {!! Form::label('Usuario ')!!}
-    {!! Form::text('IdUsuario',null,['class'=>'form-control','required','placeholder'=>'User...'])!!}
 </div>

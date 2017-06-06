@@ -9,7 +9,7 @@
                     * Los campos con (*) son obligatorios
                 </p>
                 @include('cpanel.partials.errors')
-                {!! Form::open(['route'=>'almacen.articulo.store','method'=>'POST','files'=>true,'id'=>'form-usuario']) !!}
+                {!! Form::open(['route'=>'almacen.articulo.store','method'=>'POST','files'=>true,'id'=>'form-articulo']) !!}
                     @include('cpanel.almacen.articulo.partials.fields')
                     <div class="form-group text-right m-b-0">
                         <button class="btn btn-primary waves-effect waves-light" type="submit">
