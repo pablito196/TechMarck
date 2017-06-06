@@ -35,6 +35,7 @@ class MedidaController extends Controller
 	    		$this->datos['medidas'] = DB::table('medida as m')
 	    		->join('usuario as u', 'm.IdUsuario','=','u.IdUsuario')
 	    		->select('m.IdMedida','m.Descripcion','m.FechaModificacion','u.NombreUsuario as usuario')
+                ->where('m.Activo','1')
 	    		->orderBy('m.IdMedida','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.medida.list')->with($this->datos);
@@ -110,6 +111,8 @@ class MedidaController extends Controller
             $medida = Medida::find($id);
             \Session::flash('user-dead',$medida->Descripcion);
             if(!$medida->deleteOk()){
+                $medida->Activo=chr(0);
+                $medida->save();
                 $mensaje = 'El usuario  Tiene algunas Transacciones Registradas.. Imposible Eliminar. Se Inhabilito la Cuenta ';
             }
             else{

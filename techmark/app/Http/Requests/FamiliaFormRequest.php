@@ -25,7 +25,7 @@ class FamiliaFormRequest extends Request
     {
         return [
             'Descripcion'=>'max:300',
-            'FechaModicacion'=>'date',
+            'FechaModificacion'=>'date',
             'IdUsuario'=>'',
             'Activo'=>''        ];
     }

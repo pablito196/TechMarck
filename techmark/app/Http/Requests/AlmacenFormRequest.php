@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class MarcaFormRequest extends Request
+class AlmacenFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class MarcaFormRequest extends Request
     public function rules()
     {
         return [
-            'Descripcion'=>'max:300',
+            'Descripcion'=>'max:500',
+            'Direccion'=>'max:300',
             'FechaModificacion'=>'date',
             'IdUsuario'=>'',
             'Activo'=>''

@@ -29,7 +29,7 @@ class ArticuloFormRequest extends Request
             'IdMedida'=>'required',
             'IdMarca'=>'required',
             'IdTipoArticulo'=>'required',
-            'FechaModicacion'=>'date',
+            'FechaModificacion'=>'date',
             'IdUsuario'=>'',
             'Codigo'=>'required|max:20'
         ];

@@ -4,18 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Medida extends Model
-{
-    protected $table='medida';
+use App\Stock;
 
-    protected $primaryKey='IdMedida';
+class Almacen extends Model
+{
+    protected $table='almacen';
+
+    protected $primaryKey='IdAlmacen';
 
     public $timestamps=false;
 
     protected $fillable=[
     	'Descripcion',
-    	'FechaModificacion',
+    	'Direccion',
     	'IdUsuario',
+    	'FechaModificacion',
     	'Activo'
     ];
 
@@ -23,7 +26,8 @@ class Medida extends Model
 
     function scopeName($query,$name){
         if(trim($name) != ''){
-            $query->where('Descripcion','like',"%$name%");
+            $query->where('Descripcion','like',"%$name%")
+            ->orwhere('Direccion','like','%$name%');
         }
     }
 
@@ -44,7 +48,7 @@ class Medida extends Model
     }
 
     function  deleteOk(){
-        $num = Articulo::where('IdMedida',$this->IdMedida)->count();
+        $num+=Stock::where('IdAlmacen',$this->IdAlmacen)->count();
         if($num>0)
             return false;
         else

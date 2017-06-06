@@ -33,6 +33,7 @@ class TipoArticuloController extends Controller
 	    		$this->datos['tipoarticulos'] = DB::table('tipoarticulo as t')
 	    		->join('usuario as u', 't.IdUsuario','=','u.IdUsuario')
 	    		->select('t.IdTipoArticulo','t.Descripcion','u.NombreUsuario as usuario')
+                ->where('t.Activo','1')
 	    		->orderBy('t.IdTipoArticulo','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.tipoarticulo.list')->with($this->datos);
@@ -104,6 +105,8 @@ class TipoArticuloController extends Controller
             $tipoarticulo = TipoArticulo::find($id);
             \Session::flash('user-dead',$tipoarticulo->Descripcion);
             if(!$tipoarticulo->deleteOk()){
+                $tipoarticulo->Activo=chr(0);
+                $tipoarticulo->save();
                 $mensaje = 'El usuario  Tiene algunas Transacciones Registradas.. Imposible Eliminar. Se Inhabilito la Cuenta ';
             }
             else{

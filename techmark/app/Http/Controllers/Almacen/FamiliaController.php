@@ -35,6 +35,7 @@ class FamiliaController extends Controller
 	    		$this->datos['familias'] = DB::table('familia as f')
 	    		->join('usuario as u', 'f.IdUsuario','=','u.IdUsuario')
 	    		->select('f.IdFamilia','f.Descripcion','f.FechaModificacion','u.NombreUsuario as usuario')
+                ->where('f.Activo','1')
 	    		->orderBy('f.IdFamilia','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.familia.list')->with($this->datos);
@@ -110,7 +111,7 @@ class FamiliaController extends Controller
             $familia = Familia::find($id);
             \Session::flash('user-dead',$familia->Descripcion);
             if(!$familia->deleteOk()){
-                $familia->Activo=0;
+                $familia->Activo=chr(0);
                 $familia->save();
                 $mensaje = 'La familia que intenta eliminar tiene algunas Transacciones Registradas.. Imposible Eliminar. Se Inhabilito la Familia ';
             }

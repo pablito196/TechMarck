@@ -25,10 +25,12 @@ Route::group(['prefix'=>'admin','middleware'=>['auth'],'namespace'=>'Admin'], fu
 Route::group(['prefix'=>'almacen','middleware'=>['auth'],'namespace'=>'Almacen'], function(){
 
     /* todo  referente a almacen */
+    Route::resource('almacen','AlmacenController');
     Route::resource('articulo','ArticuloController');
     Route::resource('familia','FamiliaController');
     Route::resource('marca','MarcaController');
     Route::resource('medida','MedidaController');
+    Route::resource('stock','StockController');
     Route::resource('tipoarticulo','TipoArticuloController');
 });
 
