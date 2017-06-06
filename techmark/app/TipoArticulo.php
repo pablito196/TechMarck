@@ -14,7 +14,6 @@ class TipoArticulo extends Model
 
     protected $fillable=[
     	'Descripcion',
-    	'IdFamilia',
     	'IdUsuario',
     	'Activo'
     ];

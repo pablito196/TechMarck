@@ -22,12 +22,16 @@ Route::group(['prefix'=>'admin','middleware'=>['auth'],'namespace'=>'Admin'], fu
     Route::resource('usuario','UserController');
 
 });
-Route::group(['prefix'=>'almacen','middleware'=>['auth']/*,'namespace'=>'Almacen'*/], function(){
+Route::group(['prefix'=>'almacen','middleware'=>['auth'],'namespace'=>'Almacen'], function(){
 
-    /* todo  referente a usuarios */
+    /* todo  referente a almacen */
     Route::resource('articulo','ArticuloController');
-
+    Route::resource('familia','FamiliaController');
+    Route::resource('marca','MarcaController');
+    Route::resource('medida','MedidaController');
+    Route::resource('tipoarticulo','TipoArticuloController');
 });
+
 Route::get('/p',function(){
 	echo \Hash::make("123123");
 });

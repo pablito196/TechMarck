@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ArticuloFormRequest extends Request
+class MarcaFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,9 @@ class ArticuloFormRequest extends Request
     {
         return [
             'Descripcion'=>'max:300',
-            'IdFamilia'=>'required',
-            'IdMedida'=>'required',
-            'IdMarca'=>'required',
-            'IdTipoArticulo'=>'required',
             'FechaModicacion'=>'date',
             'IdUsuario'=>'',
-            'Codigo'=>'required|max:20'
+            'Activo'=>''
         ];
     }
 }

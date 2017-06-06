@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Articulo;
+
 class Familia extends Model
 {
     protected $table='familia';
@@ -44,19 +46,10 @@ class Familia extends Model
     }
 
     function  deleteOk(){
-        /*$num = Inmueble::where('usuarios_id',$this->id)->count();
-        $num+= Ciudad::where('usuarios_id',$this->id)->count();
-        $num+= Zona::where('usuarios_id',$this->id)->count();
-        $num+= Departamento::where('usuarios_id',$this->id)->count();
-        $num+= Empresa::where('usuarios_id',$this->id)->count();
-        $num+= Galeria::where('usuarios_id',$this->id)->count();
-        $num+=Responsable::where('usuarios_id',$this->id)->count();
-        $num+=TipOfertas::where('usuarios_id',$this->id)->count();
-        $num+=TipInmuebles::where('usuarios_id',$this->id)->count();
-        $num+=News::where('usuarios_id',$this->id)->count();
+        $num = Articulo::where('IdFamilia',$this->IdFamilia)->count();
         if($num>0)
             return false;
-        else*/
+        else
             return true;
     }
 }
