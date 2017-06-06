@@ -4,21 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Articulo;
-
-class Familia extends Model
+class Stock extends Model
 {
-    protected $table='familia';
+    protected $table='existencia';
 
-    protected $primaryKey='IdFamilia';
+    protected $primaryKey='IdExistencia';
 
     public $timestamps=false;
 
     protected $fillable=[
-    	'Descripcion',
-    	'FechaModificacion',
-    	'IdUsuario',
-    	'Activo'
+    	'IdArticulo',
+    	'IdAlmacen',
+    	'CantidadExistente'
     ];
 
     protected $guarded =[];
@@ -46,10 +43,9 @@ class Familia extends Model
     }
 
     function  deleteOk(){
-        $num = Articulo::where('IdFamilia',$this->IdFamilia)->count();
-        if($num>0)
+        /*if($num>0)
             return false;
-        else
+        else*/
             return true;
     }
 }

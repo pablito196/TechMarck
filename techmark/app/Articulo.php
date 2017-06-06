@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Stock;
+
 class Articulo extends Model
 {
     protected $table='articulo';
@@ -49,19 +51,10 @@ class Articulo extends Model
     }
 
     function  deleteOk(){
-        /*$num = Inmueble::where('usuarios_id',$this->id)->count();
-        $num+= Ciudad::where('usuarios_id',$this->id)->count();
-        $num+= Zona::where('usuarios_id',$this->id)->count();
-        $num+= Departamento::where('usuarios_id',$this->id)->count();
-        $num+= Empresa::where('usuarios_id',$this->id)->count();
-        $num+= Galeria::where('usuarios_id',$this->id)->count();
-        $num+=Responsable::where('usuarios_id',$this->id)->count();
-        $num+=TipOfertas::where('usuarios_id',$this->id)->count();
-        $num+=TipInmuebles::where('usuarios_id',$this->id)->count();
-        $num+=News::where('usuarios_id',$this->id)->count();
+        $num = Stock::where('IdArticulo',$this->IdArticulo)->count();
         if($num>0)
             return false;
-        else*/
+        else
             return true;
     }
 }

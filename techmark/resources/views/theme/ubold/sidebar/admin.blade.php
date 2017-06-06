@@ -19,9 +19,15 @@
                 </li>
 
                 <li>
-                    <a href="javascript:void(0);" class="waves-effect"><i class="icon-people"></i><span class="label label-primary pull-right">2</span> <span> Almacen </span>  </a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="icon-basket"></i><span class="label label-primary pull-right">2</span> <span> Almacen </span>  </a>
                     <ul class="list-unstyled">
+                        <li><a href="{{route('almacen.almacen.index')}}">Almacenes</a></li>
                         <li><a href="{{route('almacen.articulo.index')}}">Articulos</a></li>
+                        <li><a href="{{route('almacen.familia.index')}}">Familias</a></li>
+                        <li><a href="{{route('almacen.marca.index')}}">Marcas</a></li>
+                        <li><a href="{{route('almacen.medida.index')}}">Medidas</a></li>
+                        <li><a href="{{route('almacen.stock.index')}}">Stock</a></li>
+                        <li><a href="{{route('almacen.tipoarticulo.index')}}">Tipo Articulo</a></li>
                     </ul>
                 </li>
                 

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Almacen;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use App\Http\Requests\ArticuloFormRequest;
+use App\Http\Controllers\Controller;
 use App\Articulo;
 use App\Familia;
 use App\Marca;
@@ -76,6 +76,7 @@ class ArticuloController extends Controller
     	if(Auth::user()->can('allow-insert')){
             $tiempo=Carbon::now('America/La_Paz');
             $request['FechaModificacion']=$tiempo->toDateTimeString();
+            $request['IdUsuario']=Auth::id();
             Articulo::create($request->all());
             return redirect()->route('almacen.articulo.index');
         }
@@ -111,6 +112,7 @@ class ArticuloController extends Controller
             $articulo = Articulo::find($id);
             $tiempo=Carbon::now('America/La_Paz');
             $articulo['FechaModificacion']=$tiempo->toDateTimeString();
+            $articulo['IdUsuario']=Auth::id();
             $articulo->fill($request->all());
             $articulo->save();
             \Session::flash('message','Se Actualizo Exitosamente la información');

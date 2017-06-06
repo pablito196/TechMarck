@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class ArticuloFormRequest extends Request
+class StockFormRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,9 @@ class ArticuloFormRequest extends Request
     public function rules()
     {
         return [
-            'Descripcion'=>'max:300',
-            'IdFamilia'=>'required',
-            'IdMedida'=>'required',
-            'IdMarca'=>'required',
-            'IdTipoArticulo'=>'required',
-            'FechaModificacion'=>'date',
-            'IdUsuario'=>'',
-            'Codigo'=>'required|max:20'
+            'IdArticulo'=>'',
+            'IdAlmacen'=>'',
+            'CantidadExistente'=>'numeric'
         ];
     }
 }

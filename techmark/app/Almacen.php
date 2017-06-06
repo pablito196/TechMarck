@@ -4,20 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Articulo;
+use App\Stock;
 
-class Familia extends Model
+class Almacen extends Model
 {
-    protected $table='familia';
+    protected $table='almacen';
 
-    protected $primaryKey='IdFamilia';
+    protected $primaryKey='IdAlmacen';
 
     public $timestamps=false;
 
     protected $fillable=[
     	'Descripcion',
-    	'FechaModificacion',
+    	'Direccion',
     	'IdUsuario',
+    	'FechaModificacion',
     	'Activo'
     ];
 
@@ -25,7 +26,8 @@ class Familia extends Model
 
     function scopeName($query,$name){
         if(trim($name) != ''){
-            $query->where('Descripcion','like',"%$name%");
+            $query->where('Descripcion','like',"%$name%")
+            ->orwhere('Direccion','like','%$name%');
         }
     }
 
@@ -46,7 +48,7 @@ class Familia extends Model
     }
 
     function  deleteOk(){
-        $num = Articulo::where('IdFamilia',$this->IdFamilia)->count();
+        $num+=Stock::where('IdAlmacen',$this->IdAlmacen)->count();
         if($num>0)
             return false;
         else

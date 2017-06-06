@@ -14,7 +14,6 @@ class TipoArticulo extends Model
 
     protected $fillable=[
     	'Descripcion',
-    	'IdFamilia',
     	'IdUsuario',
     	'Activo'
     ];
@@ -44,19 +43,10 @@ class TipoArticulo extends Model
     }
 
     function  deleteOk(){
-        /*$num = Inmueble::where('usuarios_id',$this->id)->count();
-        $num+= Ciudad::where('usuarios_id',$this->id)->count();
-        $num+= Zona::where('usuarios_id',$this->id)->count();
-        $num+= Departamento::where('usuarios_id',$this->id)->count();
-        $num+= Empresa::where('usuarios_id',$this->id)->count();
-        $num+= Galeria::where('usuarios_id',$this->id)->count();
-        $num+=Responsable::where('usuarios_id',$this->id)->count();
-        $num+=TipOfertas::where('usuarios_id',$this->id)->count();
-        $num+=TipInmuebles::where('usuarios_id',$this->id)->count();
-        $num+=News::where('usuarios_id',$this->id)->count();
+        $num = Articulo::where('IdTipoArticulo',$this->IdTipoArticulo)->count();
         if($num>0)
             return false;
-        else*/
+        else
             return true;
     }
 }
