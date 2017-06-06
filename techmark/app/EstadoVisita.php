@@ -4,21 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Visita extends Model
 {
     //
-    protected $table = 'cliente';
-    protected $primaryKey = 'IdCliente';
+    protected $table = 'estadovisita';
+    protected $primaryKey = 'IdEstadoVisita';
     protected $fillable = [
-        'RazonSocial', 'CorreoElectronico', 'Nit',
-        'Direccion',
-        'Telefono',
-        'Foto',
-        'FechaModificacion',
-        'Activo',
-        'IdUsuario'//aqui se pone todos tus campos en array
+        'Descripcion'
+        'Activo'
+        //aqui se pone todos tus campos en array
     ];
 public $timestamps = false;
+protected $guarded =[];
    function scopeName($query,$name){
         if(trim($name) != ''){
             $query->where('RazonSocial','like',"%$name%")

@@ -36,5 +36,5 @@ Route::group(['prefix'=>'ventas','middleware'=>['auth'],'namespace'=>'Clientes']
 
     /* todo  referente a usuarios */
     Route::resource('cliente','ClienteController');
-
+    Route::resource('visita','VisitaController');
 });

@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Clientes;
 use App\Http\Requests;
 use App\Cliente;
 use App\User;
+use App\Visita;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ClienteFormRequest;
+use App\Http\Requests\VisitaFormRequest;
 use Illuminate\Http\Request;
 use App\Tool;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use DB;
 
-class ClienteController extends Controller
+class VisitaController extends Controller
 {
     private  $datos = null;
 
@@ -31,12 +32,12 @@ class ClienteController extends Controller
        if(Auth::user()->can('allow-read')){
         if ($request)
             {
-            $this->datos['brand'] = Tool::brand('Clientes',route('ventas.cliente.index'),'Clientes');
-            $this->datos['clientes'] = Cliente::where('Activo',1)
+            $this->datos['brand'] = Tool::brand('Visita',route('ventas.visita.index'),'Visitas');
+            $this->datos['visitas'] = Visita::where('EstadoVisita',1)
                 ->name($request->get('s'))
-                ->orderBy('RazonSocial','asc')
+                ->orderBy('FechaVisitar','asc')
                 ->paginate();
-            return view('cpanel.ventas.clientes.list')->with($this->datos);
+            return view('cpanel.ventas.visitas.list')->with($this->datos);
         }
         \Session::flash('message','No existen registros de clientes');
         }
@@ -54,29 +55,20 @@ class ClienteController extends Controller
     public function create()
     {
         if(Auth::user()->can('allow-insert')){
-            $this->datos['brand'] = Tool::brand('Crear Clientes',route('ventas.cliente.index'),'Clientes');
-            return view('cpanel.ventas.clientes.registro',$this->datos);
+            $this->datos['brand'] = Tool::brand('Crear Visita',route('ventas.visita.index'),'Clientes');
+            return view('cpanel.ventas.visitas.registro',$this->datos);
         }
 
         \Session::flash('message','No tienes Permisos para agregar registros ');
         return redirect('dashboard');
     }
-    public function store(ClienteFormRequest $request)
+    public function store(VisitaFormRequest $request)
     {
         if(Auth::user()->can('allow-insert')){
-            $usu=Auth::user();
-            $request['IdUsuario']=$usu->can('allow-read');
             $tiempo=Carbon::now('America/La_Paz');
             $request['FechaModificacion']=$tiempo->toDateTimeString();
-            if(Input::hasFile('Foto'))
-            {
-                $file=Input::file('Foto');
-                $file->move(public_path().'/imagenes/clientes/',$file->getClientOriginalName());
-                $request['Foto']=$file->getClientOriginalName();
-
-            }
-            Cliente::create($request->all());
-            return redirect()->route('ventas.cliente.index');
+            Visita::create($request->all());
+            return redirect()->route('ventas.visita.index');
         }
 
         \Session::flash('message','No tienes Permisos para agregar registros ');
@@ -105,9 +97,9 @@ class ClienteController extends Controller
     {
        // dd(User::find($id));
         if(Auth::user()->can('allow-edit')){
-            $this->datos['brand'] = Tool::brand('Editar cliente',route('ventas.cliente.index'),'Cliente');
-            $this->datos['cliente'] = Cliente::find($id);
-            return view('cpanel.ventas.clientes.edit',$this->datos);
+            $this->datos['brand'] = Tool::brand('Editar Visita',route('ventas.visita.index'),'Cliente');
+            $this->datos['visita'] = Visita::find($id);
+            return view('cpanel.ventas.visitas.edit',$this->datos);
         }
 
         \Session::flash('message','No tienes Permisos para editar ');
@@ -116,24 +108,14 @@ class ClienteController extends Controller
     }
 
 
-    public function update(ClienteFormRequest $request, $id)
+    public function update(VisitaFormRequest $request, $id)
     {
         if(Auth::user()->can('allow-edit')){
-            $cliente = Cliente::find($id);
+            $visita = Visita::find($id);
             $tiempo=Carbon::now('America/La_Paz');
-            $cliente['FechaModificacion']=$tiempo->toDateTimeString();
-            $usu=Auth::user();
-            $cliente['IdUsuario']=$usu->can('allow-read');
-
-            if(Input::hasFile('Foto'))
-            {
-                $file=Input::file('Foto');
-                $file->move(public_path().'/imagenes/clientes/',$file->getClientOriginalName());
-                $cliente['Foto']=$file->getClientOriginalName();
-
-            }
-            $cliente->fill($request->all());
-            $cliente->save();
+            $visita['FechaModificacion']=$tiempo->toDateTimeString();
+            $visita->fill($request->all());
+            $visita->save();
             \Session::flash('message','Se Actualizo Exitosamente la información');
             return redirect()->back();
         }
@@ -152,13 +134,13 @@ class ClienteController extends Controller
     {
 
         if(Auth::user()->can('allow-delete')) {
-            $cliente = Cliente::find($id);
-            \Session::flash('user-dead',$cliente->Nit);
-            if(!$cliente->deleteOk()){
+            $visita = Visita::find($id);
+            \Session::flash('user-dead',$visita->Nit);
+            if(!$visita->deleteOk()){
                 $mensaje = 'El usuario  Tiene algunas Transacciones Registradas.. Imposible Eliminar. Se Inhabilito la Cuenta ';
             }
             else{
-                Cliente::destroy($id);
+                Visita::destroy($id);
                 $mensaje = 'El usuario  fue eliminado ';
 
             }
