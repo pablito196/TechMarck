@@ -18,12 +18,12 @@
         <tr>
             <td>{{$row->IdArticulo}}</td>
             <td>{{$row->Descripcion}}</td>
-            <td>{{$row->familia}}</td>
-            <td>{{$row->medida}}</td>
-            <td>{{$row->marca}}</td>
-            <td>{{$row->tipoarticulo}}</td>
+            <td>{{$row->familia->Descripcion}}</td>
+            <td>{{$row->medida->Descripcion}}</td>
+            <td>{{$row->marca->Descripcion}}</td>
+            <td>{{$row->tipoarticulo->Descripcion}}</td>
             <td>{{$row->FechaModificacion}}</td>
-            <td>{{$row->usuario}}</td>
+            <td>{{$row->usuario->NombreUsuario}}</td>
             <td>{{$row->Codigo}}</td>
             <td>
                 <a href="{{route('almacen.articulo.edit',$row->IdArticulo)}}">Ver & Editar <i class="fa fa-edit"></i> </a>

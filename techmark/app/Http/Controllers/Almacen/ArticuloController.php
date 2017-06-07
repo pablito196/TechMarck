@@ -25,11 +25,6 @@ class ArticuloController extends Controller
 
 	private $datos=null;
 
-    public function _construct()
-    {
-
-    }
-
     public function index(Request $request)
     {
     	if(Auth::user()->can('allow-read'))
@@ -37,14 +32,9 @@ class ArticuloController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Articulos',route('almacen.articulo.index'),'Almacen');
-	    		$this->datos['articulos'] = DB::table('articulo as a')
-	    		->join('familia as f', 'a.IdFamilia','=','f.IdFamilia')
-	    		->join('medida as me', 'a.IdMedida','=','me.IdMedida')
-	    		->join('marca as ma', 'a.IdMarca','=','ma.IdMarca')
-	    		->join('tipoarticulo as t', 'a.IdTipoArticulo','=','t.IdTipoArticulo')
-	    		->join('usuario as u', 'a.IdUsuario','=','u.IdUsuario')
-	    		->select('a.IdArticulo','a.Descripcion','f.Descripcion as familia','me.Descripcion as medida','ma.Descripcion as marca','t.Descripcion as tipoarticulo','a.FechaModificacion','u.NombreUsuario as usuario','a.Codigo')
-	    		->orderBy('a.IdArticulo','desc')
+	    		$this->datos['articulos'] = Articulo::with('familia','medida','marca','tipoarticulo','usuario')
+                ->name($request->get('s'))
+	    		->orderBy('IdArticulo','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.articulo.list')->with($this->datos);
 	    	}

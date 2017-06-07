@@ -29,25 +29,34 @@ class Articulo extends Model
 
     function scopeName($query,$name){
         if(trim($name) != ''){
-            $query->where('Codigo','like',"%$name%")
-            ->orwhere('Descripcion','like','%$name%');
+            $query->where('Descripcion','like',"%$name%")
+            ->orWhere('Codigo','like','%$name%');
         }
     }
 
-    function allowEdit(){
-        return $this->edit==1;
+    public function familia()
+    {
+        return $this->belongsTo('App\Familia','IdFamilia');
     }
 
-    function allowInsert(){
-        return $this->insert==1;
+    public function medida()
+    {
+        return $this->belongsTo('App\Medida', 'IdMedida');
     }
 
-    function allowDelete(){
-        return $this->delete==1;
+    public function marca()
+    {
+        return $this->belongsTo('App\Marca', 'IdMarca');
     }
 
-    function allowRead(){
-        return $this->read==1;
+    public function tipoarticulo()
+    {
+        return $this->belongsTo('App\TipoArticulo', 'IdTipoArticulo');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo('App\User', 'IdUsuario');
     }
 
     function  deleteOk(){

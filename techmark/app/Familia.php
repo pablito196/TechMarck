@@ -29,20 +29,9 @@ class Familia extends Model
         }
     }
 
-    function allowEdit(){
-        return $this->edit==1;
-    }
-
-    function allowInsert(){
-        return $this->insert==1;
-    }
-
-    function allowDelete(){
-        return $this->delete==1;
-    }
-
-    function allowRead(){
-        return $this->read==1;
+    function articulo()
+    {
+        return $this->hasMany('Articulo', 'IdFamilia');
     }
 
     function  deleteOk(){
