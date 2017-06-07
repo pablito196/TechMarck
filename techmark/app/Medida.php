@@ -21,26 +21,15 @@ class Medida extends Model
 
     protected $guarded =[];
 
-    function scopeName($query,$name){
+    function scopeDescripcion($query,$name){
         if(trim($name) != ''){
             $query->where('Descripcion','like',"%$name%");
         }
     }
 
-    function allowEdit(){
-        return $this->edit==1;
-    }
-
-    function allowInsert(){
-        return $this->insert==1;
-    }
-
-    function allowDelete(){
-        return $this->delete==1;
-    }
-
-    function allowRead(){
-        return $this->read==1;
+    public function usuario()
+    {
+        return $this->belongsTo('App\User', 'IdUsuario');
     }
 
     function  deleteOk(){

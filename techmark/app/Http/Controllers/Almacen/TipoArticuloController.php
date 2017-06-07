@@ -30,11 +30,10 @@ class TipoArticuloController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Tipo Articulos',route('almacen.tipoarticulo.index'),'Almacen');
-	    		$this->datos['tipoarticulos'] = DB::table('tipoarticulo as t')
-	    		->join('usuario as u', 't.IdUsuario','=','u.IdUsuario')
-	    		->select('t.IdTipoArticulo','t.Descripcion','u.NombreUsuario as usuario')
-                ->where('t.Activo','1')
-	    		->orderBy('t.IdTipoArticulo','desc')
+	    		$this->datos['tipoarticulos'] = TipoArticulo::with('usuario')
+                ->where('Activo','1')
+                ->descripcion($request->get('s'))
+	    		->orderBy('IdTipoArticulo','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.tipoarticulo.list')->with($this->datos);
 	    	}

@@ -14,7 +14,7 @@
             <td>{{$row->IdFamilia}}</td>
             <td>{{$row->Descripcion}}</td>
             <td>{{$row->FechaModificacion}}</td>
-            <td>{{$row->usuario}}</td>
+            <td>{{$row->usuario->NombreUsuario}}</td>
             <td>
                 <a href="{{route('almacen.familia.edit',$row->IdFamilia)}}">Ver & Editar <i class="fa fa-edit"></i> </a>
             </td>

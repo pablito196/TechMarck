@@ -32,11 +32,10 @@ class FamiliaController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Familias',route('almacen.familia.index'),'Almacen');
-	    		$this->datos['familias'] = DB::table('familia as f')
-	    		->join('usuario as u', 'f.IdUsuario','=','u.IdUsuario')
-	    		->select('f.IdFamilia','f.Descripcion','f.FechaModificacion','u.NombreUsuario as usuario')
-                ->where('f.Activo','1')
-	    		->orderBy('f.IdFamilia','desc')
+	    		$this->datos['familias'] = Familia::with('usuario')
+                ->where('Activo','1')
+                ->descripcion($request->get('s'))
+	    		->orderBy('IdFamilia','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.familia.list')->with($this->datos);
 	    	}

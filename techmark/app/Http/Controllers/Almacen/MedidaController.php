@@ -32,11 +32,10 @@ class MedidaController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Medidas',route('almacen.medida.index'),'Almacen');
-	    		$this->datos['medidas'] = DB::table('medida as m')
-	    		->join('usuario as u', 'm.IdUsuario','=','u.IdUsuario')
-	    		->select('m.IdMedida','m.Descripcion','m.FechaModificacion','u.NombreUsuario as usuario')
-                ->where('m.Activo','1')
-	    		->orderBy('m.IdMedida','desc')
+	    		$this->datos['medidas'] = Medida::with('usuario')
+                ->where('Activo','1')
+                ->descripcion($request->get('s'))
+	    		->orderBy('IdMedida','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.medida.list')->with($this->datos);
 	    	}

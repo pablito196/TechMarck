@@ -31,20 +31,14 @@ class Almacen extends Model
         }
     }
 
-    function allowEdit(){
-        return $this->edit==1;
+    function stock()
+    {
+        return $this->hasMany('App\Stock','IdAlmacen');
     }
 
-    function allowInsert(){
-        return $this->insert==1;
-    }
-
-    function allowDelete(){
-        return $this->delete==1;
-    }
-
-    function allowRead(){
-        return $this->read==1;
+    function usuario()
+    {
+        return $this->belongsTo('App\User','IdUsuario');
     }
 
     function  deleteOk(){

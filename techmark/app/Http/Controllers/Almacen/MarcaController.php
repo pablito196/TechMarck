@@ -32,11 +32,10 @@ class MarcaController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Marcas',route('almacen.marca.index'),'Almacen');
-	    		$this->datos['marcas'] = DB::table('marca as m')
-	    		->join('usuario as u', 'm.IdUsuario','=','u.IdUsuario')
-	    		->select('m.IdMarca','m.Descripcion','m.FechaModificacion','u.NombreUsuario as usuario')
-                ->where('m.Activo','1')
-	    		->orderBy('m.IdMarca','desc')
+	    		$this->datos['marcas'] = Marca::with('usuario')
+                ->where('Activo','1')
+                ->descripcion($request->get('s'))
+	    		->orderBy('IdMarca','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.marca.list')->with($this->datos);
 	    	}

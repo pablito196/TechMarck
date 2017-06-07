@@ -32,12 +32,9 @@ class StockController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Stock',route('almacen.stock.index'),'Almacen');
-	    		$this->datos['haberes'] = DB::table('existencia as e')
-	    		->join('almacen as al','e.IdAlmacen','=','al.IdAlmacen')
-                ->join('articulo as ar','e.IdArticulo','=','ar.IdArticulo')
-	    		->select('e.IdExistencia','al.Descripcion as Almacen','ar.Descripcion as Articulo','e.CantidadExistente as cantidad')
-                ->where('e.CantidadExistente','>','0')
-	    		->orderBy('e.IdExistencia','desc')
+	    		$this->datos['haberes'] = Stock::with('almacen','articulo')
+                ->descripcion($request->get('s'))
+	    		->orderBy('IdAlmacen','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.stock.list')->with($this->datos);
 	    	}

@@ -20,27 +20,22 @@ class Stock extends Model
 
     protected $guarded =[];
 
-    function scopeName($query,$name){
+    function scopeDescripcion($query,$name){
         if(trim($name) != ''){
             $query->where('Descripcion','like',"%$name%");
         }
     }
 
-    function allowEdit(){
-        return $this->edit==1;
+    function articulo()
+    {
+        return $this->belongsTo('App\Articulo', 'IdArticulo');
     }
 
-    function allowInsert(){
-        return $this->insert==1;
+    function almacen()
+    {
+        return $this->belongsTo('App\Almacen', 'IdAlmacen');
     }
 
-    function allowDelete(){
-        return $this->delete==1;
-    }
-
-    function allowRead(){
-        return $this->read==1;
-    }
 
     function  deleteOk(){
         /*if($num>0)

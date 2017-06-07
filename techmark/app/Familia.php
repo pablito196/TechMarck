@@ -23,17 +23,17 @@ class Familia extends Model
 
     protected $guarded =[];
 
-    function scopeName($query,$name){
+    function scopeDescripcion($query,$name){
         if(trim($name) != ''){
             $query->where('Descripcion','like',"%$name%");
         }
     }
 
-    function articulo()
+    public function usuario()
     {
-        return $this->hasMany('Articulo', 'IdFamilia');
+        return $this->belongsTo('App\User', 'IdUsuario');
     }
-
+    
     function  deleteOk(){
         $num = Articulo::where('IdFamilia',$this->IdFamilia)->count();
         if($num>0)

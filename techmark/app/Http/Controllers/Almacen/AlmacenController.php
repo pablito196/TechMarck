@@ -32,11 +32,9 @@ class AlmacenController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Almacenes',route('almacen.almacen.index'),'Almacen');
-	    		$this->datos['almacenes'] = DB::table('almacen as a')
-	    		->join('usuario as u', 'a.IdUsuario','=','u.IdUsuario')
-	    		->select('a.IdAlmacen','a.Descripcion','a.Direccion','a.FechaModificacion','u.NombreUsuario as usuario')
-                ->where('a.Activo','1')
-	    		->orderBy('a.IdAlmacen','desc')
+	    		$this->datos['almacenes'] = Almacen::with('stock.articulo','usuario')
+                ->where('Activo','1')
+	    		->orderBy('IdAlmacen','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.almacen.list')->with($this->datos);
 	    	}

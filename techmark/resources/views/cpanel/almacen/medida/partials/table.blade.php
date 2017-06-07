@@ -14,7 +14,7 @@
             <td>{{$row->IdMedida}}</td>
             <td>{{$row->Descripcion}}</td>
             <td>{{$row->FechaModificacion}}</td>
-            <td>{{$row->usuario}}</td>
+            <td>{{$row->usuario->NombreUsuario}}</td>
             <td>
                 <a href="{{route('almacen.medida.edit',$row->IdMedida)}}">Ver & Editar <i class="fa fa-edit"></i> </a>
             </td>

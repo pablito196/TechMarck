@@ -27,11 +27,22 @@ class Articulo extends Model
 
     protected $guarded =[];
 
-    function scopeName($query,$name){
+    function scopeDescripcion($query,$name){
         if(trim($name) != ''){
-            $query->where('Descripcion','like',"%$name%")
-            ->orWhere('Codigo','like','%$name%');
+            $query->where('Descripcion','like',"%$name%");
         }
+    }
+
+    function scopeCodigo($query,$name)
+    {
+        if(trim($name) != ''){
+            $query->where('Codigo','like',"%$name%");
+        }
+    }
+
+    public function stock()
+    {
+        return $this->hasMany('App/Stock','IdArticulo');
     }
 
     public function familia()
