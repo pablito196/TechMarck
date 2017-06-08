@@ -42,7 +42,7 @@ class Articulo extends Model
 
     public function stock()
     {
-        return $this->hasMany('App/Stock','IdArticulo');
+        return $this->hasMany('App\Stock','IdArticulo');
     }
 
     public function familia()

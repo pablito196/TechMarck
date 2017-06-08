@@ -32,9 +32,9 @@ class StockController extends Controller
 	    	if ($request)
 	    	{
 	    		$this->datos['brand'] = Tool::brand('Stock',route('almacen.stock.index'),'Almacen');
-	    		$this->datos['haberes'] = Stock::with('almacen','articulo')
+	    		$this->datos['haberes'] = Articulo::with('stock.almacen')
                 ->descripcion($request->get('s'))
-	    		->orderBy('IdAlmacen','desc')
+	    		->orderBy('IdArticulo','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.stock.list')->with($this->datos);
 	    	}
