@@ -34,8 +34,7 @@ class ArticuloController extends Controller
 	    		$this->datos['brand'] = Tool::brand('Articulos',route('almacen.articulo.index'),'Almacen');
 	    		$this->datos['articulos'] = Articulo::with('familia','medida','marca','tipoarticulo','usuario')
                 ->descripcion($request->get('s'))
-                //->codigo($request->get('s'))
-	    		->orderBy('IdArticulo','desc')
+                ->orderBy('IdArticulo','desc')
 	    		->paginate();
 	    		return view('cpanel.almacen.articulo.list')->with($this->datos);
 	    	}

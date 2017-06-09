@@ -34,7 +34,7 @@ class StockController extends Controller
 	    		$this->datos['brand'] = Tool::brand('Stock',route('almacen.stock.index'),'Almacen');
 	    		$this->datos['haberes'] = Articulo::with('stock.almacen')
                 ->descripcion($request->get('s'))
-	    		->orderBy('IdArticulo','desc')
+	    		->orderBy('Descripcion','asc')
 	    		->paginate();
 	    		return view('cpanel.almacen.stock.list')->with($this->datos);
 	    	}
@@ -105,7 +105,7 @@ class StockController extends Controller
     {
     	if(Auth::user()->can('allow-delete')) {
             $stock = Stock::find($id);
-            \Session::flash('user-dead',$almacen->Descripcion);
+            \Session::flash('user-dead',$stock->IdExistencia);
             if(!$stock->deleteOk()){
                 $mensaje = 'El almacen  Tiene algunas Transacciones Registradas.. Imposible Eliminar. Se Inhabilito la Cuenta ';
             }

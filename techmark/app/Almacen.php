@@ -24,10 +24,9 @@ class Almacen extends Model
 
     protected $guarded =[];
 
-    function scopeName($query,$name){
+    function scopeDescripcion($query,$name){
         if(trim($name) != ''){
-            $query->where('Descripcion','like',"%$name%")
-            ->orwhere('Direccion','like','%$name%');
+            $query->where('Descripcion','like',"%$name%");
         }
     }
 

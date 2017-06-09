@@ -25,18 +25,10 @@ class Articulo extends Model
     	'Codigo'
     ];
 
-    protected $guarded =[];
-
     function scopeDescripcion($query,$name){
         if(trim($name) != ''){
-            $query->where('Descripcion','like',"%$name%");
-        }
-    }
-
-    function scopeCodigo($query,$name)
-    {
-        if(trim($name) != ''){
-            $query->where('Codigo','like',"%$name%");
+            $query->where('Descripcion','like',"%$name%")
+            ->orWhere('Codigo','like','%$name%');
         }
     }
 
