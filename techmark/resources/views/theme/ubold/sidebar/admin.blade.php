@@ -23,7 +23,9 @@
                     <ul class="list-unstyled">
                         <li><a href="{{route('almacen.almacen.index')}}">Almacenes</a></li>
                         <li><a href="{{route('almacen.articulo.index')}}">Articulos</a></li>
+                        <li><a href="{{route('almacen.egreso.index')}}">Egresos</a></li>
                         <li><a href="{{route('almacen.familia.index')}}">Familias</a></li>
+                        <li><a href="{{route('almacen.ingreso.index')}}">Ingresos</a></li>
                         <li><a href="{{route('almacen.marca.index')}}">Marcas</a></li>
                         <li><a href="{{route('almacen.medida.index')}}">Medidas</a></li>
                         <li><a href="{{route('almacen.stock.index')}}">Stock</a></li>

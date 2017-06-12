@@ -28,7 +28,7 @@ class Articulo extends Model
     function scopeDescripcion($query,$name){
         if(trim($name) != ''){
             $query->where('Descripcion','like',"%$name%")
-            ->orWhere('Codigo','like','%$name%');
+            ->orwhere('Codigo','like',"%$name%");
         }
     }
 

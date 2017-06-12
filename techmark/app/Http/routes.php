@@ -27,6 +27,8 @@ Route::group(['prefix'=>'almacen','middleware'=>['auth'],'namespace'=>'Almacen']
     /* todo  referente a almacen */
     Route::resource('almacen','AlmacenController');
     Route::resource('articulo','ArticuloController');
+    Route::resource('egreso','EgresoController');
+    Route::resource('ingreso','IngresoController');
     Route::resource('familia','FamiliaController');
     Route::resource('marca','MarcaController');
     Route::resource('medida','MedidaController');

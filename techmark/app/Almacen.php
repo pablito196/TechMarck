@@ -26,7 +26,8 @@ class Almacen extends Model
 
     function scopeDescripcion($query,$name){
         if(trim($name) != ''){
-            $query->where('Descripcion','like',"%$name%");
+            $query->where('Descripcion','like',"%$name%")
+            ->orwhere('Direccion','like',"%$name%");
         }
     }
 
@@ -42,6 +43,7 @@ class Almacen extends Model
 
     function  deleteOk(){
         $num+=Stock::where('IdAlmacen',$this->IdAlmacen)->count();
+        $num+=Egreso::where('IdAlmacen',$this->IdAlmacen)->count();
         if($num>0)
             return false;
         else

@@ -29,6 +29,7 @@ class ProveedorController extends Controller
             {
                 $this->datos['brand'] = Tool::brand('Proveedor',route('proveedores.proveedor.index'),'Proveedores');
                 $this->datos['proveedores'] = Proveedor::where('Activo',true)
+                ->razon($request->get('s'))
                 ->orderBy('IdProveedor','desc')
                 ->paginate();
                 return view('cpanel.proveedores.proveedor.list')->with($this->datos);
