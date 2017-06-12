@@ -24,11 +24,13 @@ class ProveedorFormRequest extends Request
     public function rules()
     {
         return [
-            'nit' => 'max:20',
-            'razonSocial' => 'required|max:500',
-            'direccion' => 'max:300',
-            'telefono' => 'max:15',
-            'correoElectronico' => 'max:300',
+            'Nit' => 'max:20',
+            'RazonSocial' => 'required|max:500',
+            'Direccion' => 'max:300',
+            'Telefono' => 'max:15',
+            'CorreoElectronico' => 'max:300',
+            'Foto'=>'',
+            'FechaModificacion'=>''
         ];
     }
 }

@@ -1,4 +1,4 @@
 
 <div class="btn-group pull-left m-t-15">
-    <a href="{{route('almacen.articulo.create')}}" class="btn btn-primary  waves-effect waves-light" >Agregar <span class="m-l-5"><i class="fa fa-user-plus"></i></span></a>
+    <a href="{{route('proveedores.proveedor.create')}}" class="btn btn-primary  waves-effect waves-light" >Agregar <span class="m-l-5"><i class="fa fa-user-plus"></i></span></a>
 </div>

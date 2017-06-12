@@ -8,7 +8,7 @@ class Proveedor extends Model
 {
     protected $table = 'proveedor';
 
-    protected $primarykey = 'IdProveedor';
+    protected $primaryKey = 'IdProveedor';
 
     public $timestamps = false;
 
@@ -22,9 +22,5 @@ class Proveedor extends Model
     	'FechaModificacion',
     	'Activo'
     ]; 
-
-    protected $guarded = [
-
-    ];
 
 }

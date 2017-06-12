@@ -119,4 +119,5 @@ class StockController extends Controller
         }
         \Session::flash('message','No tienes Permisos para Borrar informacion');
         return redirect('dashboard');
-    }}
+    }
+}

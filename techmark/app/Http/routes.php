@@ -44,7 +44,7 @@ Route::group(['prefix'=>'ventas','middleware'=>['auth'],'namespace'=>'Clientes']
     Route::resource('cliente','ClienteController');
     Route::resource('visita','VisitaController');
 });
-Route::group(['prefix'=>'proveedores','middleware'=>['auth'],'namespace'=>'Proveedores'], function(){
+Route::group(['prefix'=>'proveedores','middleware'=>['auth']/*,'namespace'=>'Proveedores'*/], function(){
 
     Route::resource('proveedor','ProveedorController');
 

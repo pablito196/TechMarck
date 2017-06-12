@@ -18,10 +18,8 @@ use DB;
 
 class ProveedorController extends Controller
 {
-    public function __construct()
-    {
 
-    }
+    private $datos=null;
 
     public function index(Request $request)
     {
@@ -29,55 +27,88 @@ class ProveedorController extends Controller
         {
             if ($request) 
             {
-                $this->datos['brand'] = Tool::brand('Proveedores',route('proveedores.proveedor.index'),'Proveedor');
-                $this->datos['proveedores'] = DB::table('proveedor as p')
-                ->select('p.IdProveedor','p.Nit','p.RazonSocial','p.Direccion','p.Telefono','p.CorreoElectronico')
-                ->where('p.Activo','1')
-                ->orderBy('p.IdMarca','desc')
+                $this->datos['brand'] = Tool::brand('Proveedor',route('proveedores.proveedor.index'),'Proveedores');
+                $this->datos['proveedores'] = Proveedor::where('Activo',true)
+                ->orderBy('IdProveedor','desc')
                 ->paginate();
                 return view('cpanel.proveedores.proveedor.list')->with($this->datos);
             }
+            \Session::flash('message','No existen registros de proveedores');
         }
+
+        \Session::flash('message','No tienes Permiso para visualizar informacion ');
+        return redirect('dashboard');
         
     }
+
     public function create()
     {
-        return view("proveedores.proveedor.create");
+        $this->datos['brand'] = Tool::brand('Crear Proveedor',route('proveedores.proveedor.index'),'Proveedores');
+        return view("cpanel.proveedores.proveedor.registro")->with($this->datos);
     }  
+
     public function store(ProveedorFormRequest $request)
     {                                                                                                                                                                                                                            
-        $proveedor =  new Proveedor;
-        $proveedor->Nit = $request->('nit');
-        $proveedor->RazonSocial = $request->('razonSocial');
-        $proveedor->Direccion = $request->('direccion');
-        $proveedor->Telefono = $request->('telefono');
-        $proveedor->CorreoElectronico = $request->('correoElectronico');
-        $proveedor->save();
-        return Redirect::to('proveedores/proveedor');
+        if(Auth::user()->can('allow-insert')){
+            $tiempo=Carbon::now('America/La_Paz');
+            $request['FechaModificacion']=$tiempo->toDateTimeString();
+            Proveedor::create($request->all());
+            return redirect()->route('proveedores.proveedor.index');
+        }
+
+        \Session::flash('message','No tienes Permisos para agregar registros ');
+        return redirect('dashboard');
     } 
-    public function show($IdProveedor)
+
+    public function show($id)
     {
-        return view("proveedores.proveedor.show",["proveedor"=>Proveedor::findOrFail($IdProveedor)]);
+        //
     } 
-    public function edit()
+
+    public function edit($id)
     {
-        return view("proveedores.proveedor.edit",["proveedor"=>Proveedor::findOrFail($IdProveedor)]);
+        if(Auth::user()->can('allow-edit')){
+            $this->datos['brand'] = Tool::brand('Editar Proveedor',route('proveedores.proveedor.index'),'Proveedores');
+            $this->datos['proveedor'] = Proveedor::find($id);
+            return view("cpanel.proveedores.proveedor.edit",$this->datos);
+        }
+
+        \Session::flash('message','No tienes Permisos para editar ');
+        return redirect('dashboard');
+    }
+
+    public function update(ProveedorFormRequest $request,$id)
+    {
+        if(Auth::user()->can('allow-edit')){
+            $proveedor = Proveedor::find($id);
+            $tiempo=Carbon::now('America/La_Paz');
+            $proveedor['FechaModificacion']=$tiempo->toDateTimeString();
+            $proveedor->fill($request->all());
+            $proveedor->save();
+            \Session::flash('message','Se Actualizo Exitosamente la información');
+            return redirect()->route('proveedores.proveedor.index');
+        }
+        \Session::flash('message','No tienes Permisos para editar ');
+        return redirect('dashboard');
     } 
-    public function update(ProveedorFormRequest $request,$IdProveedor)
+
+    public function destroy($id)
     {
-        $proveedor = Proveedor::findOrFail($IdProveedor);
-        $proveedor->Nit = request->get('nit');
-        $proveedor->RazonSocial = request->get('razonSocial');
-        $proveedor->Direccion = request->get('direccion');
-        $proveedor->Telefono = request->get('telefono');
-        $proveedor->CorreoElectronico = request->get('correoElectronico');
-        return Redirect::to('proveedores/proveedor');
-    } 
-    public function destroy($IdProveedor)
-    {
-        $proveedor = Proveedor::findOrFail($IdProveedor);
-        $proveedor->Activo = 1;
-        $proveedor->update();
-        return Redirect::to('proveedores/proveedor');
+        if(Auth::user()->can('allow-delete')) {
+            $proveedor = Proveedor::find($id);
+            \Session::flash('user-dead',$proveedor->RazonSocial);
+            if(!$proveedor->deleteOk()){
+                $mensaje = 'El proveedor  Tiene algunas Transacciones Registradas.. Imposible Eliminar. Se Inhabilito la Cuenta ';
+            }
+            else{
+                Proveedor::destroy($id);
+                $mensaje = 'El proveedor fue eliminado ';
+
+            }
+            \Session::flash('message',$mensaje);
+            return redirect()->route('proveedores.proveedor.index');
+        }
+        \Session::flash('message','No tienes Permisos para Borrar informacion');
+        return redirect('dashboard');
     } 
 }
